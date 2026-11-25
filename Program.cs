@@ -1,23 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.Data.Sqlite;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
 
 app.MapControllerRoute(
@@ -25,5 +15,20 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+using (var cone = new SqliteConnection("Data Source=concessionaria.db"))
+{
+    cone.Open();
+    var sql = @"create table if not exists carro (
+        id integer primary key autoincrement,
+        marca text not null,
+        modelo text not null,
+        ano integer not null,
+        preco real not null,
+        quilometragem integer not null default 0,
+        cor text,
+        descricao text
+    )";
+    new SqliteCommand(sql, cone).ExecuteNonQuery();
+}
 
 app.Run();

@@ -1,0 +1,10 @@
+@model Concessionaria.Models.Carro
+
+<a href="/">&larr; Voltar</a>
+
+<h1>@Model.Marca @Model.Modelo</h1>
+<p><strong>Ano:</strong> @Model.Ano</p>
+<p><strong>Preço:</strong> @Model.Preco.ToString("C0", new System.Globalization.CultureInfo("pt-BR"))</p>
+<p><strong>Quilometragem:</strong> @Model.Quilometragem km</p>
+<p><strong>Cor:</strong> @Model.Cor</p>
+<p><strong>Descrição:</strong> @Model.Descricao</p>
