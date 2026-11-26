@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nextcar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b1dff59ccb44585fe0cbfe731e571b4215e5545")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+163cae0a2eac3c8a6d1f0253518014c468b4126b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nextcar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nextcar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
