@@ -26,7 +26,8 @@ using (var cone = new SqliteConnection("Data Source=concessionaria.db"))
         preco real not null,
         quilometragem integer not null default 0,
         cor text,
-        descricao text
+        descricao text,
+        imagem text
     )";
     new SqliteCommand(sql, cone).ExecuteNonQuery();
 }

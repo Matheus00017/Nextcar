@@ -1,48 +1,87 @@
-﻿@model List<Concessionaria.Models.Carro>
+﻿@model List<Nextcar.Models.Carro>
 @{
-    ViewData["Title"] = "Veículos";
+    Layout = null;
     var pt = new System.Globalization.CultureInfo("pt-BR");
 }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veículos - Nextcar</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <style>
+        .logo { font-size: 1.7rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--principal); }
+    </style>
+</head>
+<body>
+    <header class="topo">
+        <div class="container topo-conteudo">
+            <a class="logo" href="/">Next<span>car</span></a>
+            <nav class="menu">
+                <a href="/">Veículos</a>
+                <a href="/Home/Cadastrar" class="menu-destaque">+ Cadastrar carro</a>
+            </nav>
+        </div>
+    </header>
 
-<section class="hero">
-    <h1>Encontre o seu próximo carro</h1>
-    <p>Veículos selecionados, com procedência e as melhores condições.</p>
-</section>
+    <main class="container conteudo">
+        <section class="hero">
+            <h1>Encontre o seu próximo carro</h1>
+            <p>Veículos selecionados, com procedência e as melhores condições.</p>
+        </section>
 
-<div class="titulo-secao">
-    <h2>Nossos carros</h2>
-    <span class="contagem">@Model.Count veículo(s)</span>
-</div>
+        <div class="titulo-secao">
+            <h2>Nossos carros</h2>
+            <span class="contagem">@Model.Count veículo(s)</span>
+        </div>
 
-@if (Model.Count == 0)
-{
-    <div class="vazio">
-        <p>Nenhum carro cadastrado ainda.</p>
-        <a class="botao" href="/Home/Cadastrar">Cadastrar o primeiro carro</a>
-    </div>
-}
-else
-{
-    <div class="grade-carros">
-        @foreach (var c in Model)
+        @if (Model.Count == 0)
         {
-            <article class="card-carro">
-                <a href="/Home/Detalhes/@c.Id" class="card-imagem">
-                    <span>@c.Marca</span>
-                </a>
-                <div class="card-corpo">
-                    <h3>@c.Marca @c.Modelo</h3>
-                    <p class="card-info">
-                        @c.Ano &bull; @c.Quilometragem.ToString("N0", pt) km
-                        @if (!string.IsNullOrWhiteSpace(c.Cor))
-                        {
-                            <text>&bull; @c.Cor</text>
-                        }
-                    </p>
-                    <p class="card-preco">@c.Preco.ToString("C0", pt)</p>
-                    <a class="botao botao-bloco" href="/Home/Detalhes/@c.Id">Ver detalhes</a>
-                </div>
-            </article>
+            <div class="vazio">
+                <p>Nenhum carro cadastrado ainda.</p>
+                <a class="botao" href="/Home/Cadastrar">Cadastrar o primeiro carro</a>
+            </div>
         }
-    </div>
-}
+        else
+        {
+            <div class="grade-carros">
+                @foreach (var c in Model)
+                {
+                    <article class="card-carro">
+                        <a href="/Home/Detalhes/@c.Id" class="card-imagem">
+                            @if (!string.IsNullOrWhiteSpace(c.Imagem))
+                            {
+                                <img src="@c.Imagem" alt="@c.Marca @c.Modelo" loading="lazy" referrerpolicy="no-referrer" />
+                            }
+                            else
+                            {
+                                <span>@c.Marca</span>
+                            }
+                        </a>
+                        <div class="card-corpo">
+                            <h3>@c.Marca @c.Modelo</h3>
+                            <p class="card-info">
+                                @c.Ano &bull; @c.Quilometragem.ToString("N0", pt) km
+                                @if (!string.IsNullOrWhiteSpace(c.Cor))
+                                {
+                                    <text>&bull; @c.Cor</text>
+                                }
+                            </p>
+                            <p class="card-preco">@c.Preco.ToString("C0", pt)</p>
+                            <a class="botao botao-bloco" href="/Home/Detalhes/@c.Id">Ver detalhes</a>
+                        </div>
+                    </article>
+                }
+            </div>
+        }
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year Nextcar. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

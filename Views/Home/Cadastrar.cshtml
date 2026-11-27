@@ -1,12 +1,75 @@
-<h1>Cadastrar carro</h1>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar carro - Nextcar</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <style>
+        .logo { font-size: 1.7rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--principal); }
+    </style>
+</head>
+<body>
+    <header class="topo">
+        <div class="container topo-conteudo">
+            <a class="logo" href="/">Next<span>car</span></a>
+            <nav class="menu">
+                <a href="/">Veículos</a>
+                <a href="/Home/Cadastrar" class="menu-destaque">+ Cadastrar carro</a>
+            </nav>
+        </div>
+    </header>
 
-<form method="post">
-    <p>Marca: <input name="Marca" required /></p>
-    <p>Modelo: <input name="Modelo" required /></p>
-    <p>Ano: <input name="Ano" type="number" required /></p>
-    <p>Preço: <input name="Preco" type="number" step="0.01" required /></p>
-    <p>Quilometragem: <input name="Quilometragem" type="number" required /></p>
-    <p>Cor: <input name="Cor" /></p>
-    <p>Descrição: <br /><textarea name="Descricao" rows="4" cols="40"></textarea></p>
-    <button type="submit">Salvar</button>
-</form>
+    <main class="container conteudo">
+        <a class="voltar" href="/">&larr; Voltar aos veículos</a>
+        <h1>Cadastrar carro</h1>
+
+        <form class="form-carro" method="post">
+            <div class="form-grade">
+                <div>
+                    <label for="Marca">Marca</label>
+                    <input id="Marca" name="Marca" placeholder="Ex.: Toyota" required />
+                </div>
+                <div>
+                    <label for="Modelo">Modelo</label>
+                    <input id="Modelo" name="Modelo" placeholder="Ex.: Corolla XEi" required />
+                </div>
+                <div>
+                    <label for="Ano">Ano</label>
+                    <input id="Ano" name="Ano" type="number" min="1950" max="2100" placeholder="2022" required />
+                </div>
+                <div>
+                    <label for="Preco">Preço (R$)</label>
+                    <input id="Preco" name="Preco" type="number" step="0.01" min="0" placeholder="89900" required />
+                </div>
+                <div>
+                    <label for="Quilometragem">Quilometragem</label>
+                    <input id="Quilometragem" name="Quilometragem" type="number" min="0" placeholder="35000" required />
+                </div>
+                <div>
+                    <label for="Cor">Cor</label>
+                    <input id="Cor" name="Cor" placeholder="Ex.: Prata" />
+                </div>
+            </div>
+
+            <label for="Imagem">URL da imagem</label>
+            <input id="Imagem" name="Imagem" type="url" placeholder="https://site.com/foto-do-carro.jpg" />
+
+            <label for="Descricao">Descrição</label>
+            <textarea id="Descricao" name="Descricao" rows="4" placeholder="Opcionais, estado de conservação..."></textarea>
+
+            <button type="submit" class="botao">Salvar carro</button>
+        </form>
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy @DateTime.Now.Year Nextcar. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

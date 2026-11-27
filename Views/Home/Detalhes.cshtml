@@ -1,10 +1,78 @@
-@model Concessionaria.Models.Carro
+@model Nextcar.Models.Carro
+@{
+    Layout = null;
+    var pt = new System.Globalization.CultureInfo("pt-BR");
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.Marca @Model.Modelo - Nextcar</title>
+    <link rel="stylesheet" href="/css/site.css" />
+    <style>
+        .logo { font-size: 1.7rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--principal); }
+    </style>
+</head>
+<body>
+    <header class="topo">
+        <div class="container topo-conteudo">
+            <a class="logo" href="/">Next<span>car</span></a>
+            <nav class="menu">
+                <a href="/">Veículos</a>
+                <a href="/Home/Cadastrar" class="menu-destaque">+ Cadastrar carro</a>
+            </nav>
+        </div>
+    </header>
 
-<a href="/">&larr; Voltar</a>
+    <main class="container conteudo">
+        <a class="voltar" href="/">&larr; Voltar aos veículos</a>
 
-<h1>@Model.Marca @Model.Modelo</h1>
-<p><strong>Ano:</strong> @Model.Ano</p>
-<p><strong>Preço:</strong> @Model.Preco.ToString("C0", new System.Globalization.CultureInfo("pt-BR"))</p>
-<p><strong>Quilometragem:</strong> @Model.Quilometragem km</p>
-<p><strong>Cor:</strong> @Model.Cor</p>
-<p><strong>Descrição:</strong> @Model.Descricao</p>
+        <div class="detalhes">
+            <div class="detalhes-imagem">
+                @if (!string.IsNullOrWhiteSpace(Model.Imagem))
+                {
+                    <img src="@Model.Imagem" alt="@Model.Marca @Model.Modelo" referrerpolicy="no-referrer" />
+                }
+                else
+                {
+                    <span>@Model.Marca</span>
+                }
+            </div>
+
+            <div class="detalhes-info">
+                <h1>@Model.Marca @Model.Modelo</h1>
+                <p class="detalhes-preco">@Model.Preco.ToString("C0", pt)</p>
+
+                <table class="ficha">
+                    <tr><th>Ano</th><td>@Model.Ano</td></tr>
+                    <tr><th>Quilometragem</th><td>@Model.Quilometragem.ToString("N0", pt) km</td></tr>
+                    <tr><th>Cor</th><td>@(string.IsNullOrWhiteSpace(Model.Cor) ? "Não informada" : Model.Cor)</td></tr>
+                </table>
+
+                @if (!string.IsNullOrWhiteSpace(Model.Descricao))
+                {
+                    <h3>Sobre o veículo</h3>
+                    <p class="descricao">@Model.Descricao</p>
+                }
+
+                <div class="acoes-carro">
+                    <a class="botao-mini" href="/Home/Editar/@Model.Id">Editar</a>
+
+                    <form method="post" action="/Home/Excluir/@Model.Id"
+                          onsubmit="return confirm('Excluir este carro?');">
+                        <button type="submit" class="botao-mini botao-perigo">Excluir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy @DateTime.Now.Year Nextcar. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

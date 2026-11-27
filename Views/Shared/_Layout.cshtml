@@ -4,15 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Nextcar</title>
-    <link rel="icon" href="~/favicon.ico" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     <header class="topo">
         <div class="container topo-conteudo">
-            <a class="logo" href="/">
-                <img src="~/img/Logo.png" alt="Nextcar" />
-            </a>
+            <a class="logo" href="/">Next<span>car</span></a>
             <nav class="menu">
                 <a href="/">Veículos</a>
                 <a href="/Home/Cadastrar" class="menu-destaque">+ Cadastrar carro</a>
@@ -26,7 +23,7 @@
 
     <footer class="rodape">
         <div class="container">
-            <p>&copy @DateTime.Now.Year Nextcar. Todos os direitos reservados.</p>
+            <p>&copy @DateTime.Now.Year Nextcar</p>
         </div>
     </footer>
 </body>

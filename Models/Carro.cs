@@ -1,4 +1,4 @@
-namespace Concessionaria.Models;
+namespace Nextcar.Models;
 
 public class Carro
 {
